@@ -1,6 +1,6 @@
 // src/types/next-auth.d.ts
 
-import NextAuth from 'next-auth';
+import 'next-auth'; // Only import the module for augmentation
 
 declare module 'next-auth' {
     interface Session {
