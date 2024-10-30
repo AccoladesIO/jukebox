@@ -20,17 +20,22 @@ const RecentlyPlayedTracks: React.FC = () => {
     useEffect(() => {
         const fetchRecentlyPlayed = async () => {
             if (session) {
+                setLoading(true); // Set loading to true before fetching
                 try {
-                    const res = await fetch('/api/recently-played');
+                    const res = await fetch('/api/recently-listened');
                     if (!res.ok) {
                         throw new Error('Failed to fetch recently played tracks');
                     }
                     const data: RecentlyPlayed = await res.json();
-                    setTracks(data.items.map(item => item.track)); // Map the response to the track structure
-                } catch (err: any) {
-                    setError(err.message);
+                    setTracks(data.items.map(item => item.track));
+                } catch (err: unknown) {
+                    if (err instanceof Error) {
+                        setError(err.message);
+                    } else {
+                        setError('An unexpected error occurred');
+                    }
                 } finally {
-                    setLoading(false);
+                    setLoading(false); // Set loading to false after fetching
                 }
             }
         };
@@ -40,6 +45,10 @@ const RecentlyPlayedTracks: React.FC = () => {
 
     if (status === 'loading') {
         return <p>Loading...</p>;
+    }
+
+    if (loading) {
+        return <p>Loading your recently played tracks...</p>; // Use loading state here
     }
 
     if (error) {

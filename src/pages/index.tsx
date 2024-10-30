@@ -1,11 +1,7 @@
-import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import React from 'react';
 import { useSession, signOut } from "next-auth/react";
-import { FaSpotify } from "react-icons/fa"; // Updated import for FaSpotify
 import Layout from "@/components/layouts/Layout";
-import RecentlyPlayed from "@/components/tracks/Recents";
 import RecentlyPlayedTracks from "@/components/tracks/Recents";
 
 export default function Home() {
