@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import Loading from '../layouts/Loading';
 
 interface Track {
     id: string;
     name: string;
     artists: { name: string }[];
+    album: { images: { url: string }[] };
 }
 
 interface RecentlyPlayed {
@@ -20,14 +22,19 @@ const RecentlyPlayedTracks: React.FC = () => {
     useEffect(() => {
         const fetchRecentlyPlayed = async () => {
             if (session) {
-                setLoading(true); // Set loading to true before fetching
+                setLoading(true);
                 try {
-                    const res = await fetch('/api/recently-listened');
+                    const res = await fetch('/api/recently-played');
                     if (!res.ok) {
                         throw new Error('Failed to fetch recently played tracks');
                     }
                     const data: RecentlyPlayed = await res.json();
-                    setTracks(data.items.map(item => item.track));
+                    const uniqueTracks = Array.from(
+                        new Map(
+                            data.items.map(item => [item.track.id, item.track])
+                        ).values()
+                    ).slice(0, 6); // Take only the first 6 unique tracks
+                    setTracks(uniqueTracks);
                 } catch (err: unknown) {
                     if (err instanceof Error) {
                         setError(err.message);
@@ -35,7 +42,7 @@ const RecentlyPlayedTracks: React.FC = () => {
                         setError('An unexpected error occurred');
                     }
                 } finally {
-                    setLoading(false); // Set loading to false after fetching
+                    setLoading(false);
                 }
             }
         };
@@ -48,7 +55,7 @@ const RecentlyPlayedTracks: React.FC = () => {
     }
 
     if (loading) {
-        return <p>Loading your recently played tracks...</p>; // Use loading state here
+        return <Loading />;
     }
 
     if (error) {
@@ -60,15 +67,19 @@ const RecentlyPlayedTracks: React.FC = () => {
     }
 
     return (
-        <div>
-            <h2>Recently Played Songs</h2>
-            <ul>
-                {tracks.map(track => (
-                    <li key={track.id}>
-                        {track.name} by {track.artists.map(artist => artist.name).join(', ')}
-                    </li>
-                ))}
-            </ul>
+        <div className='w-full'>
+            <p className='w-full text-white text-xl text-left p-4'>Recently Played</p>
+        <div className='w-full p-4 grid grid-cols-2 gap-4'>
+            {tracks.map(track => (
+                <div className='p-2 w-full text-gray-100 flex items-center space-x-4' key={track.id}>
+                    <img src={track?.album?.images[0]?.url} alt={track.name} className='w-16 h-16 rounded' />
+                    <div>
+                        <p className='font-bold text-sm'>{track.name}</p>
+                        <p className='text-xs text-gray-300'>{track.artists.map(artist => artist.name).join(', ')}</p>
+                    </div>
+                </div>
+            ))}
+            </div>
         </div>
     );
 };

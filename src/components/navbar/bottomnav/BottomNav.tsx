@@ -33,7 +33,7 @@ const BottomNav = ({ active }: { active: string }) => {
 
 
     return (
-        <div className='w-full fixed bottom-0 left-0 sm:hidden flex items-center justify-between p-1 z-30 border-t'>
+        <div className='bg-black w-full fixed bottom-0 left-0 sm:hidden flex items-center justify-between p-1 z-30 border-t'>
             {sideLink.map((_link, i) => (
                 <div key={_link.id + _link.name + i} className={`text-[11px] w-full rounded-2xl transition-all duration-700 px-2 py-2 ${active === _link.name ? ' text-green-600 font-bold' : " text-slate-100"}`}>
                     <Link href={_link.href} className='w-full flex-col flex items-center justify-center gap-1'>

@@ -28,7 +28,7 @@ const Layout: React.FC<LayoutProp> = ({ children, active }) => {
                     <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-black opacity-80"></div>
                     <div className="absolute flex flex-col items-center justify-center gap-4 h-full w-full text-center text-white p-2">
                         <h1 className="text-7xl font-bold mt-10">Jukebox</h1>
-                        <p className="text-xl text-white">Select playlist from your Jukebox — automatically and based on what you like</p>
+                        <p className="text-base text-white">Select playlist from your Jukebox — automatically and based on what you like</p>
                         <button
                             className="bg-green-500 text-white font-bold px-6 py-3 text-lg rounded-3xl hover:bg-green-400 w-full flex items-center justify-center gap-2"
                             onClick={handleSignIn}

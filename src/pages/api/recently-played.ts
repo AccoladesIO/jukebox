@@ -24,10 +24,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const accessToken = session.accessToken; // Access token from session
 
     // Add a log to confirm the accessToken is present
-    console.log("Access Token:", accessToken);
+    // console.log("Access Token:", accessToken);
 
     // Fetch the recently played tracks using the utility function
     const response = await fetchWebApi('v1/me/player/recently-played', accessToken);
+    console.log(response)
 
     if (!response.ok) {
         const errorData = await response.json(); // Get error message from Spotify
