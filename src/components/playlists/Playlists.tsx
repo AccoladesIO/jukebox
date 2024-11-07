@@ -71,7 +71,7 @@ const TopPlaylists: React.FC = () => {
                 {playlists.map((playlist, i) => (
                     <div
                         className="p-4 flex flex-col items-center space-y-2 relative"
-                        key={playlist.id}
+                        key={playlist.id + i}
                         style={{ minWidth: "180px" }}
                     >
                         {/* Playlist Image */}
