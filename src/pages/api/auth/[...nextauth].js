@@ -48,7 +48,7 @@ export default NextAuth({
             clientId: process.env.SPOTIFY_CLIENT_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             authorization:
-                "https://accounts.spotify.com/authorize?scope=playlist-read-private,playlist-read-collaborative,user-library-read,user-read-private,user-read-email,user-read-playback-state,user-modify-playback-state,user-read-recently-played,user-top-read,user-follow-read", // add scopes as needed
+                "https://accounts.spotify.com/authorize?scope=playlist-read-private,playlist-read-collaborative,user-library-read,user-read-private,user-read-email,user-read-playback-state,user-modify-playback-state,user-read-recently-played,user-top-read,user-follow-read,playlist-modify-private,playlist-modify-public", // add scopes as needed
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,

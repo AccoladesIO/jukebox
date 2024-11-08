@@ -59,7 +59,13 @@ const MostPlayed: React.FC = () => {
         fetchMostPlayed();
     }, [timeRange, contentType]);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) {
+        return (
+            <div className='w-full p-4 h-screen flex items-center justify-center bg-black'>
+                <img src='https://images.squarespace-cdn.com/content/v1/58d008c65016e1f1078cc00a/1590864966359-Z73RW444O8IMF2FD96LY/Spotify-Loading-Animation_1.gif' alt={`loading`} className="w-40 h-40 rounded mr-4" />
+            </div>
+        )
+    };
     if (error) return <p>Error: {error}</p>;
 
     const tabStyle = (type: ContentType) =>
@@ -146,7 +152,7 @@ const MostPlayed: React.FC = () => {
             )}
 
             {contentType === 'genres' && (
-                <div>
+                <div className='w-full'>
                     <h2 className="text-2xl font-semibold mb-4">Top Genres</h2>
                     <div className="flex flex-wrap gap-2">
                         {topGenres.map((genre, index) => (

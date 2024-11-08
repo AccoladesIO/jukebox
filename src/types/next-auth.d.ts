@@ -4,6 +4,12 @@ import 'next-auth'; // Only import the module for augmentation
 
 declare module 'next-auth' {
     interface Session {
-        accessToken: string; // Add the accessToken property
+        accessToken: string;
+        user: {
+            id: string; // Add this line
+            name?: string | null;
+            email?: string | null;
+            image?: string | null;
+        };// Add the accessToken property
     }
 }

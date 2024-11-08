@@ -75,9 +75,9 @@ const RecentlyPlayedTracks: React.FC = () => {
                         <img src={track?.album?.images[0]?.url} alt={track.name} className='w-12 h-12 rounded' />
                         <div className='flex items-start justify-start flex-col w-full h-full'>
                             <p className="font-bold text-xs">
-                                {track.name.length > 15 ? `${track.name.substring(0, 15)}...` : track.name}
+                                {track.name.length > 15 ? `${track.name.substring(0, 10)}...` : track.name}
                             </p>
-                            <p className='text-[10px] text-gray-300'>{track.artists.map(artist => artist.name).join(', ')}</p>
+                            <p className='text-[10px] text-gray-300'>{track.artists.map(artist => artist.name).join(', ').length > 15 ? `${track.artists.map(artist => artist.name).join(', ').substring(0, 10)}...` : track.artists.map(artist => artist.name).join(', ')}</p>
                         </div>
                     </div>
                 ))}

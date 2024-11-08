@@ -5,6 +5,7 @@ import Layout from "@/components/layouts/Layout";
 import RecentlyPlayedTracks from "@/components/tracks/Recents";
 import TopArtists from "@/components/topartist/TopArtist";
 import TopPlaylists from "@/components/playlists/Playlists";
+import NewReleases from "@/components/tracks/NewRelease";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -60,6 +61,7 @@ export default function Home() {
         </div>
       </div>
       <TopPlaylists />
+      <NewReleases />
       <button
         className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
         onClick={handleSignOut}

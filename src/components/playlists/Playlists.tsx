@@ -44,7 +44,7 @@ const TopPlaylists: React.FC = () => {
     // Logging playlists after they are fetched and state is updated
     useEffect(() => {
         if (playlists.length > 0) {
-            console.log(playlists);
+            // console.log(playlists);
         }
     }, [playlists]);
 
