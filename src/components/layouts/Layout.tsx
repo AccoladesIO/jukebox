@@ -40,7 +40,7 @@ const Layout: React.FC<LayoutProp> = ({ children, active }) => {
                 </div>
             ) : (
                 <div className="w-full relative">
-                    <div className="w-full">
+                    <div className="w-full mb-28">
                         <Header active={active} />
                         {children}
                     </div>

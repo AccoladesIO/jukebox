@@ -60,12 +60,12 @@ const TopArtists: React.FC = () => {
 
     return (
         <div className='w-full'>
-            <p className='w-full text-white text-xl text-left px-4'>Top Artists</p>
+            <p className='w-full text-white text-2xl text-left px-4 font-bold'>Top Artists</p>
             <div className="w-full px-4 flex items-center justify-start overflow-x-scroll space-x-4 custom-scrollbar">
                 {artists.map((artist, i) => (
                     <div className="p-2 flex flex-col items-start space-y-2 relative" key={artist.id} style={{ minWidth: "150px" }}>
                         <Image src={artist.images[0]?.url} alt={artist.name} className="rounded" height={150} width={150} />
-                        <p className="flex items-center gap-2 text-gray-100">
+                        <p className="flex items-center gap-2 text-gray-100 text-xs">
                             #{i + 1} {artist.name}
                         </p>
                     </div>

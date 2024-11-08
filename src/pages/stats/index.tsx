@@ -1,12 +1,11 @@
 import Layout from '@/components/layouts/Layout'
+import MostPlayed from '@/components/MostPlayed'
 import React from 'react'
 
 const Stats = () => {
   return (
     <Layout active='Stats'>
-      <div>
-        stats
-      </div>
+        <MostPlayed />
     </Layout>
   )
 }

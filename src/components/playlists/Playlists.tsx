@@ -66,8 +66,8 @@ const TopPlaylists: React.FC = () => {
 
     return (
         <div className='w-full'>
-            <p className='w-full text-white text-xl text-left px-4 mb-4'>Top Playlists</p>
-            <div className="w-full px-4 flex items-center justify-start overflow-x-auto space-x-2 custom-scrollbar">
+            <p className='w-full text-white text-2xl text-left px-4 mb-4 font-bold'>Top Playlists</p>
+            <div className="w-full flex items-center justify-start overflow-x-auto  custom-scrollbar">
                 {playlists.map((playlist, i) => (
                     <div
                         className="p-4 flex flex-col items-center space-y-2 relative"
@@ -89,7 +89,7 @@ const TopPlaylists: React.FC = () => {
                         )}
 
                         {/* Playlist Name and Track Count */}
-                        <p className="text-gray-100 text-left font-medium text-sm w-full">
+                        <p className="text-gray-100 text-left font-medium text-xs w-full">
                             {`${playlist.name.substring(0, 15)}${playlist.name.length > 15 ? '...' : ''}`}
                         </p>
                     </div>

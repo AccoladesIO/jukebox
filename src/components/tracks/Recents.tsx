@@ -68,17 +68,19 @@ const RecentlyPlayedTracks: React.FC = () => {
 
     return (
         <div className='w-full'>
-            <p className='w-full text-white text-xl text-left p-4'>Recently Played</p>
-        <div className='w-full p-4 grid grid-cols-2 gap-4'>
-            {tracks.map(track => (
-                <div className='p-2 w-full text-gray-100 flex items-center space-x-4' key={track.id}>
-                    <img src={track?.album?.images[0]?.url} alt={track.name} className='w-16 h-16 rounded' />
-                    <div>
-                        <p className='font-bold text-sm'>{track.name}</p>
-                        <p className='text-xs text-gray-300'>{track.artists.map(artist => artist.name).join(', ')}</p>
+            <p className='w-full text-white text-2xl text-left p-4 font-bold'>Recently Played</p>
+            <div className='w-full p-4 grid grid-cols-2 gap-1'>
+                {tracks.map(track => (
+                    <div className='p-2 w-full text-gray-100 flex items-center space-x-2' key={track.id}>
+                        <img src={track?.album?.images[0]?.url} alt={track.name} className='w-12 h-12 rounded' />
+                        <div className='flex items-start justify-start flex-col w-full h-full'>
+                            <p className="font-bold text-xs">
+                                {track.name.length > 15 ? `${track.name.substring(0, 15)}...` : track.name}
+                            </p>
+                            <p className='text-[10px] text-gray-300'>{track.artists.map(artist => artist.name).join(', ')}</p>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
             </div>
         </div>
     );
