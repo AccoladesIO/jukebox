@@ -49,7 +49,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             topGenres
         });
     } catch (error) {
-        console.error('Error fetching top items:', error);
-        res.status(500).json({ message: 'Error fetching top items' });
+        res.status(500).json({ error: error instanceof Error ? error.message : "Unknown error" });
     }
 }
