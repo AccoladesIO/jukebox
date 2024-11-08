@@ -48,8 +48,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             topAlbums,
             topGenres
         });
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ message: 'Internal Server Error' });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            // Now you can safely access `error.message`
+            res.status(500).json({ error: error.message });
+        } else {
+            // If error is not an instance of `Error`
+            res.status(500).json({ error: "An unknown error occurred" });
+        }
     }
 }
