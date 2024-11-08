@@ -15,19 +15,6 @@ interface SearchResponse {
     };
 }
 
-// Helper function to call Spotify's API
-async function fetchFromSpotify(endpoint: string, token: string) {
-    const response = await fetch(`https://api.spotify.com/v1/${endpoint}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-    if (!response.ok) {
-        throw new Error(`Spotify API error: ${response.statusText}`);
-    }
-    return response.json();
-}
-
 // Helper function to create a playlist for the user
 async function createPlaylist(userId: string, token: string, name: string) {
     const response = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
