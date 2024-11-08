@@ -49,6 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             topGenres
         });
     } catch (error) {
-        res.status(500).json({ error: error instanceof Error ? error.message : "Unknown error" });
+        console.log(error)
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 }
