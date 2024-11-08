@@ -55,6 +55,7 @@ const GenreSelector = () => {
 
             if (response.status === 200) {
                 setMessage('Playlist created successfully!');
+                setLoading(false)
             } else {
                 setMessage('Error creating playlist.');
             }
