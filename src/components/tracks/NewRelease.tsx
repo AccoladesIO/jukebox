@@ -18,7 +18,7 @@ const NewReleases = () => {
                 const response = await fetch('/api/new-release');
                 const data = await response.json();
 
-                setNewReleases(data.albums?.items || data); 
+                setNewReleases(data.albums?.items || data);
             } catch (error) {
                 console.error('Error fetching new releases:', error);
             }
@@ -47,7 +47,8 @@ const NewReleases = () => {
         <motion.div
             className="p-4 space-y-4 text-white"
             initial="hidden"
-            animate="show"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }} // Trigger animation when 20% of the component is in view
             variants={containerVariants}
         >
             <h2 className="text-2xl font-semibold mb-4">New Releases</h2>

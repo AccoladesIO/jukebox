@@ -3,12 +3,12 @@ import Image from 'next/legacy/image'
 import React from 'react'
 import { useRouter } from 'next/router'
 
-const Tools = () => {
+const Playlist = () => {
     const router = useRouter()
 
     return (
         <Layout active='Tools'>
-            <div className='w-full p-4'>
+            <div className='w-full p-4' onClick={() => router.push('/tools/create-playlist/create-auto/')}>
                 <div className='w-full relative h-[180px]'>
                     {/* Gradient overlay with a higher z-index */}
                     <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-black opacity-80 z-10"></div>
@@ -24,8 +24,8 @@ const Tools = () => {
 
                     {/* Text overlaid on top */}
                     <div className="absolute inset-0 flex flex-col items-start justify-end z-20 text-left p-4">
-                        <h1 className="text-white text-sm font-bold">Shazam any song on Spotify</h1>
-                        <h2 className="text-gray-300 text-xs mt-1">Identify songs instantly and add them to your playlist.</h2>
+                        <h1 className="text-white text-sm font-bold">Create Automatically</h1>
+                        <h2 className="text-gray-300 text-xs mt-1">Let Jukebox Automatically Create a Playlist For You</h2>
                     </div>
                 </div>
             </div>
@@ -45,8 +45,8 @@ const Tools = () => {
                     />
 
                     {/* Text overlaid on top */}
-                    <div className="absolute inset-0 flex flex-col items-start justify-end z-20 text-left p-4" onClick={() => router.push('/tools/create-playlist/')}>
-                        <h1 className="text-white text-sm font-bold">Create Your Own Playlist</h1>
+                    <div className="absolute inset-0 flex flex-col items-start justify-end z-20 text-left p-4" onClick={() => router.push('/tools/create-playlist/createbygenre/')}>
+                        <h1 className="text-white text-sm font-bold">Create based off genre</h1>
                         <h2 className="text-gray-300 text-xs mt-1">Choose your favorite genres and craft a playlist unique to you.</h2>
                     </div>
                 </div>
@@ -55,4 +55,4 @@ const Tools = () => {
     )
 }
 
-export default Tools
+export default Playlist
