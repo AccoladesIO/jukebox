@@ -72,7 +72,7 @@ const TopPlaylists: React.FC = () => {
                     <div
                         className="p-4 flex flex-col items-center space-y-2 relative"
                         key={playlist.id + i}
-                        style={{ minWidth: "180px" }}
+                        style={{ minWidth: "100px" }}
                     >
                         {/* Playlist Image */}
                         {playlist?.images && playlist.images.length > 0 ? (
@@ -80,16 +80,16 @@ const TopPlaylists: React.FC = () => {
                                 src={playlist.images[0].url}
                                 alt={playlist.name}
                                 className="rounded-md"
-                                height={150}
-                                width={150}
+                                height={100}
+                                width={100}
                                 objectFit="cover"
                             />
                         ) : (
-                            <div className="w-[150px] h-[150px] bg-gray-300 rounded-md" /> // Placeholder for missing image
+                            <div className="w-[80px] h-[80px] bg-gray-300 rounded-md" /> // Placeholder for missing image
                         )}
 
                         {/* Playlist Name and Track Count */}
-                        <p className="text-gray-100 text-left font-medium text-xs w-full">
+                        <p className="text-gray-100 text-left font-medium text-[10px] w-full">
                             {`${playlist.name.substring(0, 15)}${playlist.name.length > 15 ? '...' : ''}`}
                         </p>
                     </div>

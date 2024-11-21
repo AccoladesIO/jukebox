@@ -6,7 +6,7 @@
 html {
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth !important;
-  background: #131313;
+  background: #000000;
 }
 @layer components {
   .custom-scrollbar::-webkit-scrollbar {

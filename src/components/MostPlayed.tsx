@@ -77,10 +77,10 @@ const MostPlayed: React.FC = () => {
         <div className="p-4 space-y-8 text-white">
             {/* Tab Navigation */}
             <div className="flex space-x-4 mb-4 w-full bg-black p-2">
-                <button className={tabStyle('tracks')} onClick={() => setContentType('tracks')}>Top Tracks</button>
-                <button className={tabStyle('artists')} onClick={() => setContentType('artists')}>Top Artists</button>
-                <button className={tabStyle('albums')} onClick={() => setContentType('albums')}>Top Albums</button>
-                <button className={tabStyle('genres')} onClick={() => setContentType('genres')}>Top Genres</button>
+                <button className={tabStyle('tracks')} onClick={() => setContentType('tracks')}>Tracks</button>
+                <button className={tabStyle('artists')} onClick={() => setContentType('artists')}>Artists</button>
+                <button className={tabStyle('albums')} onClick={() => setContentType('albums')}>Albums</button>
+                <button className={tabStyle('genres')} onClick={() => setContentType('genres')}>Genres</button>
             </div>
 
             {/* Time Range Selector */}
@@ -97,14 +97,14 @@ const MostPlayed: React.FC = () => {
                     <ul className="space-y-4 w-full">
                         {topTracks.map((track, i) => (
                             <li key={track.id} className="flex items-center p-2 rounded-lg shadow-md w-full">
-                                <p className='flex items-center justify-center w-10 text-lg font-bold p-1'>#{i + 1}</p>
+                                <p className='flex items-center justify-center w-10 text-lg font-bold p-1 text-green-500'>#{i + 1}</p>
                                 {track.album.images[0]?.url && (
                                     <img src={track.album.images[0].url} alt={track.album.name} className="w-12 h-12 rounded mr-4" />
                                 )}
                                 <div className='w-full'>
                                     <p className="text-sm font-bold w-full text-wite">{track.name}</p>
-                                    <p className="text-xs text-green-200 w-full">{track.artists.map((artist) => artist.name).join(', ')}</p>
-                                    <p className="text-xs text-green-400 w-full">{track.album.name}</p>
+                                    <p className="text-xs text-white w-full">{track.artists.map((artist) => artist.name).join(', ')}</p>
+                                    <p className="text-[10px] text-white w-full">{track.album.name}</p>
                                 </div>
                             </li>
                         ))}
@@ -118,13 +118,13 @@ const MostPlayed: React.FC = () => {
                     <ul className="space-y-4 w-full">
                         {topArtists.map((artist, i) => (
                             <li key={artist.id} className="flex items-center p-2 rounded-lg shadow-md w-full">
-                                <p className='flex items-center justify-center w-10 text-lg font-bold p-1'>#{i + 1}</p>
+                                <p className='flex items-center justify-center w-10 text-lg font-bold p-1 text-green-500'>#{i + 1}</p>
                                 {artist.images[0]?.url && (
                                     <img src={artist.images[0].url} alt={artist.name} className="w-12 h-12 rounded mr-4" />
                                 )}
                                 <div className='w-full'>
                                     <p className="text-sm font-semibold w-full">{artist.name}</p>
-                                    <p className="text-xs text-green-200 w-full">Genres: {artist.genres.slice(0, 3).join(', ')}</p>
+                                    <p className="text-xs text-white w-full">Genres: {artist.genres.slice(0, 3).join(', ')}</p>
                                 </div>
                             </li>
                         ))}
@@ -138,12 +138,12 @@ const MostPlayed: React.FC = () => {
                     <ul className="space-y-4 w-full">
                         {topAlbums.map((album, i) => (
                             <li key={album.id} className="flex items-center p-2 rounded-lg shadow-md">
-                                <p className='flex items-center justify-center w-10 text-lg font-bold p-1'>#{i + 1}</p>
+                                <p className='flex items-center justify-center w-10 text-lg font-bold p-1 text-green-500'>#{i + 1}</p>
                                 {album.images[0]?.url && (
                                     <img src={album.images[0].url} alt={album.name} className="w-12 h-12 rounded mr-4" />
                                 )}
                                 <div className='w-full'>
-                                    <p className="text-sm font-semibold text-green-300">{album.name}</p>
+                                    <p className="text-sm font-semibold text-white">{album.name}</p>
                                 </div>
                             </li>
                         ))}
