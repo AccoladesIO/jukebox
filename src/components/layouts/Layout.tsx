@@ -12,6 +12,7 @@ interface LayoutProp {
 
 const Layout: React.FC<LayoutProp> = ({ children, active }) => {
     const { data: session } = useSession();
+    
 
     const handleSignIn = () => signIn('spotify'); // Add handleSignIn function
 

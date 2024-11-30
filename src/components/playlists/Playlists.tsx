@@ -90,7 +90,7 @@ const TopPlaylists: React.FC = () => {
 
                         {/* Playlist Name and Track Count */}
                         <p className="text-gray-100 text-left font-medium text-[10px] w-full">
-                            {`${playlist.name.substring(0, 15)}${playlist.name.length > 15 ? '...' : ''}`}
+                            {`${playlist.name.substring(0, 10)}${playlist.name.length > 10 ? '...' : ''}`}
                         </p>
                     </div>
                 ))}

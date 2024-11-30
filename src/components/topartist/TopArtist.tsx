@@ -65,7 +65,7 @@ const TopArtists: React.FC = () => {
                 {artists.map((artist, i) => (
                     <div className="p-2 flex flex-col items-start space-y-1 relative" key={artist.id} style={{ minWidth: "100px" }}>
                         <Image src={artist.images[0]?.url} alt={artist.name} className="rounded-full" height={100} width={100} />
-                        <p className="flex items-center gap-2 text-gray-100 text-xs">
+                        <p className="flex items-center gap-2 text-gray-100 text-[10px]">
                             #{i + 1} {artist.name}
                         </p>
                     </div>

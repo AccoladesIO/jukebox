@@ -33,9 +33,7 @@ const MostPlayed: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
     const [contentType, setContentType] = useState<ContentType>('tracks');
-    console.log(TopArtists)
-    console.log(topTracks)
-    console.log(topAlbums)
+
 
     useEffect(() => {
         const fetchMostPlayed = async () => {
@@ -62,7 +60,7 @@ const MostPlayed: React.FC = () => {
     if (loading) {
         return (
             <div className='w-full p-4 h-screen flex items-center justify-center bg-black'>
-                <img src='https://images.squarespace-cdn.com/content/v1/58d008c65016e1f1078cc00a/1590864966359-Z73RW444O8IMF2FD96LY/Spotify-Loading-Animation_1.gif' alt={`loading`} className="w-40 h-40 rounded mr-4" />
+                <img src='https://images.squarespace-cdn.com/content/v1/58d008c65016e1f1078cc00a/1590864966359-Z73RW444O8IMF2FD96LY/Spotify-Loading-Animation_1.gif' alt={`loading`} className="w-[295px] h-[295] rounded mr-4" />
             </div>
         )
     };
@@ -74,9 +72,9 @@ const MostPlayed: React.FC = () => {
         `px-2 py-2 cursor-pointer rounded-md w-full text-xs ${timeRange === range ? 'bg-green-600 text-black' : ' text-green-600'}`;
 
     return (
-        <div className="p-4 space-y-8 text-white">
+        <div className="p-4 text-white">
             {/* Tab Navigation */}
-            <div className="flex space-x-4 mb-4 w-full bg-black p-2">
+            <div className="flex space-x-4 w-full bg-black p-2">
                 <button className={tabStyle('tracks')} onClick={() => setContentType('tracks')}>Tracks</button>
                 <button className={tabStyle('artists')} onClick={() => setContentType('artists')}>Artists</button>
                 <button className={tabStyle('albums')} onClick={() => setContentType('albums')}>Albums</button>
@@ -84,7 +82,7 @@ const MostPlayed: React.FC = () => {
             </div>
 
             {/* Time Range Selector */}
-            <div className="flex space-x-2 mb-8 w-full bg-black p-2">
+            <div className="flex space-x-2 w-full bg-black p-2">
                 <button className={timeRangeStyle('short_term')} onClick={() => setTimeRange('short_term')}>1 Month</button>
                 <button className={timeRangeStyle('medium_term')} onClick={() => setTimeRange('medium_term')}>6 Months</button>
                 <button className={timeRangeStyle('long_term')} onClick={() => setTimeRange('long_term')}>12 Months</button>
@@ -102,8 +100,8 @@ const MostPlayed: React.FC = () => {
                                     <img src={track.album.images[0].url} alt={track.album.name} className="w-12 h-12 rounded mr-4" />
                                 )}
                                 <div className='w-full'>
-                                    <p className="text-sm font-bold w-full text-wite">{track.name}</p>
-                                    <p className="text-xs text-white w-full">{track.artists.map((artist) => artist.name).join(', ')}</p>
+                                    <p className="text-sm font-bold w-full text-wite">{track.name.length > 20 ? `${track.name.substring(0, 20)}...` : track.name}</p>
+                                    <p className="text-xs text-white w-full">{track.artists.map(artist => artist.name).join(', ').length > 15 ? `${track.artists.map(artist => artist.name).join(', ').substring(0, 15)}...` : track.artists.map(artist => artist.name).join(', ')}</p>
                                     <p className="text-[10px] text-white w-full">{track.album.name}</p>
                                 </div>
                             </li>

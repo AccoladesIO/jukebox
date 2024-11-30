@@ -9,7 +9,7 @@ import NewReleases from "@/components/tracks/NewRelease";
 
 export default function Home() {
   const { data: session } = useSession();
-  // console.log(session, session?.accessToken);
+  // console.log(session);
 
   const handleSignOut = () => signOut();
 

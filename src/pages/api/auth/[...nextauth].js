@@ -1,7 +1,7 @@
-// pages/api/auth/[...nextauth].js
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
+// Refresh the access token when expired
 async function refreshAccessToken (token) {
     try {
         const url = "https://accounts.spotify.com/api/token";
@@ -23,20 +23,24 @@ async function refreshAccessToken (token) {
         const refreshedTokens = await response.json();
 
         if (!response.ok) {
-            throw refreshedTokens;
+            throw new Error(refreshedTokens.error_description || "Failed to refresh token");
         }
+
+        const now = Date.now();
+        const expiresAt = now + refreshedTokens.expires_in * 1000; // Expiration timestamp in ms
 
         return {
             ...token,
             accessToken: refreshedTokens.access_token,
-            accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000, // Expiration time in ms
-            refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fallback to the old refresh token
+            accessTokenExpires: expiresAt, // Expiration time in ms
+            refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Keep the old refresh token if none provided
         };
     } catch (error) {
         console.error("Failed to refresh access token:", error);
 
         return {
             ...token,
+            accessToken: null, // Explicitly invalidate the token if error occurs
             error: "RefreshAccessTokenError",
         };
     }
@@ -48,31 +52,43 @@ export default NextAuth({
             clientId: process.env.SPOTIFY_CLIENT_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             authorization:
-                "https://accounts.spotify.com/authorize?scope=playlist-read-private,playlist-read-collaborative,user-library-read,user-read-private,user-read-email,user-read-playback-state,user-modify-playback-state,user-read-recently-played,user-top-read,user-follow-read,playlist-modify-private,playlist-modify-public", // add scopes as needed
+                "https://accounts.spotify.com/authorize?scope=playlist-read-private,playlist-read-collaborative,user-library-read,user-read-private,user-read-email,user-read-playback-state,user-modify-playback-state,user-read-recently-played,user-top-read,user-follow-read,playlist-modify-private,playlist-modify-public",
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt ({ token, account }) {
-            // Initial sign-in
+            // Initial sign-in, store access token and refresh token
             if (account) {
                 token.accessToken = account.access_token;
                 token.refreshToken = account.refresh_token;
                 token.accessTokenExpires = Date.now() + account.expires_in * 1000; // Expiration time in ms
+                token.userId = account.providerAccountId; // Spotify user ID
             }
 
-            // Return previous token if the access token has not expired yet
+            // If the access token has not expired yet, return the current token
             if (Date.now() < token.accessTokenExpires) {
                 return token;
             }
 
-            // Access token has expired, try to update it
+            // If the token is expired, refresh it
             return refreshAccessToken(token);
         },
         async session ({ session, token }) {
+            // Map the token to the session object
             session.accessToken = token.accessToken;
+            session.refreshToken = token.refreshToken; // Optional: Include refresh token
             session.error = token.error;
+            session.userId = token.userId; // Include Spotify user ID
             return session;
         },
+    },
+    pages: {
+        signIn: "/auth/signin",  // Redirect to custom sign-in page
+        signOut: "/auth/signout", // Redirect to custom sign-out page
+        error: "/auth/error",  // Redirect to custom error page (if any errors occur)
+    },
+    session: {
+        strategy: "jwt",  // Use JWT session strategy
     },
 });
