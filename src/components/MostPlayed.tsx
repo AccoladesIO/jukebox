@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import TopArtists from './topartist/TopArtist';
 
 interface Track {
     id: string;

@@ -31,9 +31,23 @@ const PlaylistGenerator = () => {
                 }
             );
             console.log("Playlist created:", response.data);
-        } catch (error: any) {
-            console.error("Error creating playlist:", error.response?.data || error.message);
-            setError("Failed to create playlist. Please try again.");
+        } catch (error: unknown) {
+            // Log the raw error object for debugging
+            console.error("Error creating playlist:", error);
+
+            // Check if the error is an AxiosError
+            if (axios.isAxiosError(error)) {
+                // Log Axios-specific error details
+                console.error("Axios Error Data:", error.response?.data);
+                setError(error.response?.data?.error?.message || "Failed to create playlist. Please try again.");
+            } else if (error instanceof Error) {
+                // General Error object
+                console.error("General Error Message:", error.message);
+                setError("An unexpected error occurred: " + error.message);
+            } else {
+                // Fallback for unknown error types
+                setError("An unknown error occurred.");
+            }
         } finally {
             setLoading(false);
         }

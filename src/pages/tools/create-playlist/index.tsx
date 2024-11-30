@@ -2,11 +2,9 @@ import Layout from '@/components/layouts/Layout'
 import Image from 'next/legacy/image'
 import React from 'react'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
 
 const Playlist = () => {
     const router = useRouter()
-    const { data: session } = useSession();
 
     return (
         <Layout active='Tools'>
