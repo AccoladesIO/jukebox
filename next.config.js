@@ -19,7 +19,7 @@ module.exports = withPWA({
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "http://localhost:3000",  // Frontend origin
+            value: "http://localhost:3000",  
           },
           {
             key: "Access-Control-Allow-Credentials",
