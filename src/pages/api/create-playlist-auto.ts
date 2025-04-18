@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-
+import { authOptions } from "./auth/[...nextauth]";
 // Define interfaces
 interface UserProfile {
     country: string;
@@ -38,7 +38,7 @@ const spotifyApi = (accessToken: string) =>
     });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const session = await getSession({ req });
+    const session = await getServerSession(req, res, authOptions);
     // Ensure the method is POST
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Method not allowed" });

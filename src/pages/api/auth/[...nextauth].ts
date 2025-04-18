@@ -89,7 +89,7 @@ export const authOptions = {
         error: "/auth/error",
     },
     session: {
-        strategy: "jwt",
+        strategy: "jwt" as const,
     },
 };
 
