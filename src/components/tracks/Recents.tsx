@@ -21,7 +21,7 @@ interface RecentlyPlayed {
 }
 
 const RecentlyPlayedTracks: React.FC = () => {
-    const { data: session, status } = useSession()
+    const { data: session, } = useSession()
     const [tracks, setTracks] = useState<Track[]>([])
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string | null>(null)

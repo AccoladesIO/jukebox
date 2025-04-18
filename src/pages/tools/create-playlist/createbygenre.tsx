@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+
 import Layout from '@/components/layouts/Layout';
 import { useSession, signIn } from 'next-auth/react';
 import React, { useState, useEffect } from 'react';

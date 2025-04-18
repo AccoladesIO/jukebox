@@ -161,7 +161,7 @@ export default function Home() {
             <h1 className="text-3xl font-bold text-white">
               <span className="text-green-500">Welcome back,</span> {session?.user?.name?.split(" ")[0]}
             </h1>
-            <p className="text-zinc-400 mt-1">Here's what's happening with your music</p>
+            <p className="text-zinc-400 mt-1">Here&apos;s what&apos;s happening with your music</p>
           </motion.div>
 
           {/* Recently Played Section */}

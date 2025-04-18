@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import type React from "react"
@@ -17,7 +18,7 @@ interface Playlist {
 }
 
 const TopPlaylists: React.FC = () => {
-    const { data: session, status } = useSession()
+    const { data: session,} = useSession()
     const [playlists, setPlaylists] = useState<Playlist[]>([])
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string | null>(null)
@@ -35,6 +36,7 @@ const TopPlaylists: React.FC = () => {
                     }
                     const data = await res.json()
                     setPlaylists(data.items)
+                    
                 } catch (err: unknown) {
                     if (err instanceof Error) {
                         setError(err.message)
