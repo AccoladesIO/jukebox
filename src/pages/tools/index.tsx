@@ -23,7 +23,7 @@ const Tools = () => {
                     />
 
                     {/* Text overlaid on top */}
-                    <div className="absolute inset-0 flex flex-col items-start justify-end z-20 text-left p-4">
+                    <div className="absolute inset-0 flex flex-col items-start justify-end z-20 text-left p-4" onClick={() => router.push('/tools/shazam/')}>
                         <h1 className="text-white text-sm font-bold">Shazam any song on Spotify</h1>
                         <h2 className="text-gray-300 text-xs mt-1">Identify songs instantly and add them to your playlist.</h2>
                     </div>

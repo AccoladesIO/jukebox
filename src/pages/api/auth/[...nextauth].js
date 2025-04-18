@@ -46,7 +46,7 @@ async function refreshAccessToken (token) {
     }
 }
 
-export default NextAuth({
+export const authOptions = {
     providers: [
         SpotifyProvider({
             clientId: process.env.SPOTIFY_CLIENT_ID,
@@ -79,16 +79,18 @@ export default NextAuth({
             session.accessToken = token.accessToken;
             session.refreshToken = token.refreshToken; // Optional: Include refresh token
             session.error = token.error;
-            session.userId = token.userId; // Include Spotify user ID
+            session.user.id = token.userId; // Include Spotify user ID as user.id
             return session;
         },
     },
     pages: {
-        signIn: "/auth/signin",  // Redirect to custom sign-in page
-        signOut: "/auth/signout", // Redirect to custom sign-out page
-        error: "/auth/error",  // Redirect to custom error page (if any errors occur)
+        signIn: "/auth/signin",
+        signOut: "/auth/signout",
+        error: "/auth/error",
     },
     session: {
-        strategy: "jwt",  // Use JWT session strategy
+        strategy: "jwt",
     },
-});
+};
+
+export default NextAuth(authOptions);
