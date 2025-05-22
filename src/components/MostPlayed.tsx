@@ -510,7 +510,7 @@ const MostPlayed: React.FC = () => {
 
                                             return (
                                                 <motion.span
-                                                    key={index}
+                                                    key={genre}
                                                     whileHover={{ scale: 1.05, backgroundColor: "#1DB954" }}
                                                     whileTap={{ scale: 0.95 }}
                                                     className={`${sizeClasses[size]

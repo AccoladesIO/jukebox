@@ -1,7 +1,5 @@
 "use client"
-
 import type React from "react"
-
 import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -20,7 +18,6 @@ interface Album {
 const NewReleases: React.FC = () => {
     const { data: session } = useSession()
     const [newReleases, setNewReleases] = useState<Album[]>([])
-    console.log("New Releases:", newReleases)
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string | null>(null)
     const [activeAlbum, setActiveAlbum] = useState<string | null>(null)
@@ -37,7 +34,6 @@ const NewReleases: React.FC = () => {
                     const data = await response.json()
                     setNewReleases(data.albums?.items || data)
                 } catch (err) {
-                    console.error("Error fetching new releases:", err)
                     setError(err instanceof Error ? err.message : "An unexpected error occurred")
                 } finally {
                     setLoading(false)
@@ -48,13 +44,11 @@ const NewReleases: React.FC = () => {
         fetchNewReleases()
     }, [session])
 
-    // Format date to be more readable
     const formatReleaseDate = (dateString: string) => {
         const date = new Date(dateString)
         return date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
     }
 
-    // Animation variants
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {

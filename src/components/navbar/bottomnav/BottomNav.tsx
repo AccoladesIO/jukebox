@@ -4,11 +4,6 @@ import { HiMiniHome } from "react-icons/hi2";
 import { FaChartSimple } from "react-icons/fa6";
 import { FaToolbox } from "react-icons/fa6";
 
-
-
-
-
-
 const BottomNav = ({ active }: { active: string }) => {
     const sideLink = [
         {
@@ -31,11 +26,10 @@ const BottomNav = ({ active }: { active: string }) => {
         },
     ]
 
-
     return (
         <div className='bg-black w-full fixed bottom-0 left-0 sm:hidden flex items-center justify-between z-30 p-4'>
-            {sideLink.map((_link, i) => (
-                <div key={_link.id + _link.name + i} className={`text-[11px] w-full rounded-2xl transition-all duration-700 px-2 py-2 ${active === _link.name ? ' text-green-600 font-bold' : " text-slate-100"}`}>
+            {sideLink.map((_link) => (
+                <div key={_link.id + _link.name} className={`text-[11px] w-full rounded-2xl transition-all duration-700 px-2 py-2 ${active === _link.name ? ' text-green-600 font-bold' : " text-slate-100"}`}>
                     <Link href={_link.href} className='w-full flex-col flex items-center justify-center gap-1'>
                         <span className="inline-block">
                             {_link.icon}

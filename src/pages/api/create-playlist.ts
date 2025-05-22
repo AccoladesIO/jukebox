@@ -3,6 +3,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
 import { NextApiRequest, NextApiResponse } from 'next';
+const baseURL = process.env.INTERNAL_URL;
 
 interface CreatePlaylistRequestBody {
     playlistName: string;
@@ -52,10 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!playlistName || !genre || genre.length === 0) {
             return res.status(400).json({ message: 'Missing required fields' });
         }
-
-        console.log(`Creating playlist for user ${userId} with genres: ${genre.join(', ')}`);
-
-        const createPlaylistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+        const createPlaylistResponse = await fetch(`${baseURL}/users/${userId}/playlists`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -67,10 +65,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 public: false
             })
         });
-
         if (!createPlaylistResponse.ok) {
             const errorData = await createPlaylistResponse.json();
-            console.error('Error creating playlist:', errorData);
             return res.status(createPlaylistResponse.status).json({
                 error: 'Error creating playlist',
                 details: errorData
@@ -90,7 +86,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         if (!recommendationsResponse.ok) {
             const errorData = await recommendationsResponse.json();
-            console.error('Error getting recommendations:', errorData);
             return res.status(recommendationsResponse.status).json({
                 error: 'Error getting recommendations',
                 details: errorData
@@ -123,7 +118,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         if (!addTracksResponse.ok) {
             const errorData = await addTracksResponse.json();
-            console.error('Error adding tracks:', errorData);
             return res.status(addTracksResponse.status).json({
                 error: 'Error adding tracks to playlist',
                 details: errorData
@@ -137,7 +131,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             tracksAdded: trackUris.length
         });
     } catch (error: any) {
-        console.error('Error in create-playlist handler:', error);
         return res.status(500).json({ error: 'Internal server error', message: error.message });
     }
 }

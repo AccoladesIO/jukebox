@@ -29,10 +29,10 @@ interface Album {
 interface SpotifyApiResponse<T> {
     items: T[];
 }
-
+const baseURL: string | undefined = process.env.INTERNAL_URL;
 
 async function fetchFromSpotify<T>(endpoint: string, token: string): Promise<SpotifyApiResponse<T>> {
-    const response = await fetch(`https://api.spotify.com/v1/${endpoint}`, {
+    const response = await fetch(`${baseURL}/${endpoint}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -42,24 +42,15 @@ async function fetchFromSpotify<T>(endpoint: string, token: string): Promise<Spo
     }
     return response.json();
 }
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const session = await getSession({ req });
-
     if (!session) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-
     try {
         const accessToken = session.accessToken as string;
-
-        // Get top tracks
         const topTracks = await fetchFromSpotify<Track>('me/top/tracks?time_range=short_term&limit=20', accessToken);
-
-        // Get top artists
         const topArtists = await fetchFromSpotify<Artist>('me/top/artists?time_range=short_term&limit=20', accessToken);
-
-        // Extract top albums from top tracks
         const topAlbums = topTracks.items
             .map((track) => track.album)
             .reduce<Album[]>((uniqueAlbums, album) => {
@@ -67,9 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return uniqueAlbums;
             }, []);
 
-        // Extract top genres from top artists
         const topGenres = Array.from(new Set(topArtists.items.flatMap((artist) => artist.genres)));
-
         res.status(200).json({
             topTracks: topTracks.items,
             topArtists: topArtists.items,
