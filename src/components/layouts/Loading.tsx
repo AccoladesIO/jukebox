@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const Loading = () => {
     return (
         <div className="w-full p-4 m-10 mx-auto  rounded-md shadow h-screen">
@@ -14,7 +13,6 @@ const Loading = () => {
                 </div>
             </div>
         </div>
-
     )
 }
 

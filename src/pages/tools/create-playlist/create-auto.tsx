@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 
 const PlaylistGenerator = () => {
-    const { data: session } = useSession(); // Fetch the session
+    const { data: session } = useSession(); 
     const [name, setName] = useState("");
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
@@ -14,38 +14,27 @@ const PlaylistGenerator = () => {
             setError("You must be logged in to create a playlist.");
             return;
         }
-
         setLoading(true);
         setError(null);
-
         try {
             const response = await axios.post(
                 "/api/create-playlist-auto",
                 { name },
                 {
-                    withCredentials: true, // Ensure cookies are sent
+                    withCredentials: true, 
                     headers: {
-                        Authorization: `Bearer ${session.accessToken}`, // Include access token in headers
+                        Authorization: `Bearer ${session.accessToken}`, 
                         'Content-Type': 'application/json'
                     },
                 }
             );
-            console.log("Playlist created:", response.data);
+            return response.data
         } catch (error: unknown) {
-            // Log the raw error object for debugging
-            console.error("Error creating playlist:", error);
-
-            // Check if the error is an AxiosError
             if (axios.isAxiosError(error)) {
-                // Log Axios-specific error details
-                console.error("Axios Error Data:", error.response?.data);
                 setError(error.response?.data?.error?.message || "Failed to create playlist. Please try again.");
             } else if (error instanceof Error) {
-                // General Error object
-                console.error("General Error Message:", error.message);
                 setError("An unexpected error occurred: " + error.message);
             } else {
-                // Fallback for unknown error types
                 setError("An unknown error occurred.");
             }
         } finally {

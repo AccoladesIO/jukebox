@@ -1,12 +1,12 @@
 import { SessionProvider } from "next-auth/react";
 import { AppProps } from 'next/app';
-import { Session } from 'next-auth'; // Import the Session type
+import { Session } from 'next-auth'; 
 import '../styles/globals.css';
 import { ContextProvider } from '@/context/Context';
 
 interface CustomAppProps extends AppProps {
   pageProps: {
-    session: Session | null; // Use Session type or null
+    session: Session | null; 
   };
 }
 

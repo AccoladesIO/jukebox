@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
 "use client"
-
 import type React from "react"
-
 import { useEffect, useState, useRef } from "react"
 import { useSession } from "next-auth/react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -19,7 +16,7 @@ interface Artist {
 }
 
 const TopArtists: React.FC = () => {
-    const { data: session, status } = useSession()
+    const { data: session } = useSession()
     const [artists, setArtists] = useState<Artist[]>([])
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string | null>(null)
@@ -48,11 +45,9 @@ const TopArtists: React.FC = () => {
                 }
             }
         }
-
         fetchTopArtists()
     }, [session])
 
-    // Animation variants
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -176,8 +171,7 @@ const TopArtists: React.FC = () => {
                                             <Play className="h-6 w-6" />
                                         </motion.div>
                                     </div>
-
-                                    <div className="absolute top-1 left-1 bg-black/60 text-green-500 text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
+                                    <div className={`absolute top-1 left-1 bg-black/60 text-green-500 text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center ${activeArtist && 'text-green-700'}`}>
                                         {i + 1}
                                     </div>
                                 </div>

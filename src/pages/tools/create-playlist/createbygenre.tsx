@@ -37,11 +37,9 @@ const GenreSelector = () => {
         }
     }, [session, status]);
 
-    // Fetch genres when component mounts
     useEffect(() => {
         const fetchGenres = async () => {
             if (status !== 'authenticated') {
-                console.log("Not authenticated yet, waiting...");
                 return;
             }
 
@@ -111,7 +109,6 @@ const GenreSelector = () => {
                 setSelectedGenres([]);
 
                 if (response.data.playlistUrl) {
-                    // Could present a link to the created playlist
                     setMessage(`Playlist created with ${response.data.tracksAdded || 0} tracks!`);
                 }
             }
@@ -127,7 +124,6 @@ const GenreSelector = () => {
         }
     };
 
-    // If not authenticated, show sign in button
     if (status === 'unauthenticated') {
         return (
             <Layout active='Tools'>
@@ -161,18 +157,11 @@ const GenreSelector = () => {
             <div className='max-w-lg mx-auto p-6 rounded-lg shadow-md text-white'>
                 <h1 className='text-2xl font-semibold mb-6 text-center'>Create Spotify Playlist by Genre</h1>
 
-                {/* Debug Information
-                <div className="mb-4 p-3 bg-gray-800 rounded-lg">
-                    <details>
-                        <summary className="cursor-pointer text-sm font-medium">Session Information (Debug)</summary>
-                        <pre className="mt-2 p-2 bg-gray-900 rounded text-xs overflow-auto max-h-40">{sessionInfo}</pre>
-                    </details>
-                </div> */}
 
                 {/* Error Message */}
                 {error && (
                     <div className="mb-4 p-3 bg-red-900/50 border border-red-500 rounded-lg">
-                        <p className="text-red-200">{error}</p>
+                        <p className="text-red-200">{error} {sessionInfo}</p>
                     </div>
                 )}
 

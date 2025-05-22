@@ -16,7 +16,6 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false)
   const [showSignOutConfirm, setShowSignOutConfirm] = useState(false)
 
-  // Handle scroll effect for header
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10)
@@ -34,7 +33,6 @@ export default function Home() {
     setShowSignOutConfirm(false)
   }
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

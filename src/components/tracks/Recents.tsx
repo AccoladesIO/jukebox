@@ -1,7 +1,5 @@
 "use client"
-
 import type React from "react"
-
 import { useEffect, useState, useRef } from "react"
 import { useSession } from "next-auth/react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -42,7 +40,7 @@ const RecentlyPlayedTracks: React.FC = () => {
                     const data: RecentlyPlayed = await res.json()
                     const uniqueTracks = Array.from(
                         new Map(data.items.map((item) => [item.track.id, item.track])).values(),
-                    ).slice(0, 6) // Take only the first 6 unique tracks
+                    ).slice(0, 6) 
                     setTracks(uniqueTracks)
                 } catch (err: unknown) {
                     if (err instanceof Error) {
@@ -55,7 +53,6 @@ const RecentlyPlayedTracks: React.FC = () => {
                 }
             }
         }
-
         fetchRecentlyPlayed()
     }, [session])
 
@@ -67,7 +64,6 @@ const RecentlyPlayedTracks: React.FC = () => {
             setIsPlaying(true)
         }
     }
-
     const handleMouseEnter = (trackId: string) => {
         setHoverStates((prev) => ({ ...prev, [trackId]: true }))
     }
@@ -76,7 +72,6 @@ const RecentlyPlayedTracks: React.FC = () => {
         setHoverStates((prev) => ({ ...prev, [trackId]: false }))
     }
 
-    // Animation variants
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {

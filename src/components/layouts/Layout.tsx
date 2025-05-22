@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from '@/components/navbar/header/Header';
 import BottomNav from '@/components/navbar/bottomnav/BottomNav';
-import Image from 'next/image'; // Import for Image component
-import { FaSpotify } from 'react-icons/fa'; // Import Spotify icon
+import Image from 'next/image'; 
+import { FaSpotify } from 'react-icons/fa'; 
 import { useSession, signIn } from 'next-auth/react';
 
 interface LayoutProp {
@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProp> = ({ children, active }) => {
     const { data: session } = useSession();
     
 
-    const handleSignIn = () => signIn('spotify'); // Add handleSignIn function
+    const handleSignIn = () => signIn('spotify'); 
 
     return (
         <>

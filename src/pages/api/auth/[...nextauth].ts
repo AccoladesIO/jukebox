@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
-
 import NextAuth, { AuthOptions, Session, User } from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 import { JWT } from "next-auth/jwt";
-
-// Extend the JWT token type
 interface ExtendedToken extends JWT {
     accessToken: string;
     refreshToken: string;
@@ -13,8 +9,6 @@ interface ExtendedToken extends JWT {
     userId: string;
     error?: string;
 }
-
-// Extend the Session type
 interface ExtendedSession extends Session {
     accessToken: string;
     refreshToken: string;
@@ -26,12 +20,10 @@ interface ExtendedSession extends Session {
         image?: string | null;
     };
 }
-
-// Refresh the access token when expired
+const internalURL = process.env.BASE_URL
 async function refreshAccessToken(token: ExtendedToken): Promise<ExtendedToken> {
     try {
-        const url = "https://accounts.spotify.com/api/token";
-
+        const url = `${internalURL}/api/token`;
         const response = await fetch(url, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -69,7 +61,6 @@ async function refreshAccessToken(token: ExtendedToken): Promise<ExtendedToken> 
     }
 }
 
-// Strongly typed AuthOptions
 export const authOptions: AuthOptions = {
     providers: [
         SpotifyProvider({
@@ -82,7 +73,6 @@ export const authOptions: AuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt({ token, account }): Promise<ExtendedToken> {
-            // Initial sign-in
             if (account) {
                 return {
                     ...token,
@@ -93,12 +83,10 @@ export const authOptions: AuthOptions = {
                 };
             }
 
-            // Token not expired yet
             if (Date.now() < (token as ExtendedToken).accessTokenExpires) {
                 return token as ExtendedToken;
             }
 
-            // Token expired, refresh it
             return refreshAccessToken(token as ExtendedToken);
         },
 
