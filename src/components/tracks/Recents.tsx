@@ -40,7 +40,7 @@ const RecentlyPlayedTracks: React.FC = () => {
                     const data: RecentlyPlayed = await res.json()
                     const uniqueTracks = Array.from(
                         new Map(data.items.map((item) => [item.track.id, item.track])).values(),
-                    ).slice(0, 6) 
+                    ).slice(0, 6)
                     setTracks(uniqueTracks)
                 } catch (err: unknown) {
                     if (err instanceof Error) {
@@ -103,8 +103,8 @@ const RecentlyPlayedTracks: React.FC = () => {
                     <div className="h-6 w-6 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
-                    {[...Array(6)].map((_, i) => (
-                        <div key={i} className="bg-zinc-800/50 rounded-md p-2 animate-pulse flex items-center">
+                    {[...Array(6)].map((_) => (
+                        <div key={Math.random() * 100000} className="bg-zinc-800/50 rounded-md p-2 animate-pulse flex items-center">
                             <div className="w-12 h-12 bg-zinc-700 rounded-md mr-3"></div>
                             <div className="space-y-2 flex-1">
                                 <div className="h-3 bg-zinc-700 rounded w-3/4"></div>

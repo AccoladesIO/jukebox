@@ -82,8 +82,8 @@ const TopPlaylists: React.FC = () => {
                     <div className="h-6 w-6 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
                 <div className="flex overflow-x-auto space-x-4 pb-4 hide-scrollbar">
-                    {[...Array(6)].map((_, i) => (
-                        <div key={i} className="flex-shrink-0 w-[140px] animate-pulse">
+                    {[...Array(6)].map((_) => (
+                        <div key={Math.random() * 100000} className="flex-shrink-0 w-[140px] animate-pulse">
                             <div className="w-[140px] h-[140px] bg-zinc-800 rounded-lg mb-2"></div>
                             <div className="h-3 bg-zinc-800 rounded w-3/4 mb-1"></div>
                             <div className="h-2 bg-zinc-800 rounded w-1/2"></div>

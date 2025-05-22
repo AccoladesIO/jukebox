@@ -80,8 +80,8 @@ const NewReleases: React.FC = () => {
                     <div className="h-6 w-6 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
                 <div className="space-y-3">
-                    {[...Array(4)].map((_, i) => (
-                        <div key={i} className="bg-zinc-800/40 rounded-lg p-3 animate-pulse flex items-center">
+                    {[...Array(4)].map((_) => (
+                        <div key={Math.random() * 1000000} className="bg-zinc-800/40 rounded-lg p-3 animate-pulse flex items-center">
                             <div className="w-14 h-14 bg-zinc-700 rounded-md mr-3"></div>
                             <div className="space-y-2 flex-1">
                                 <div className="h-3 bg-zinc-700 rounded w-3/4"></div>

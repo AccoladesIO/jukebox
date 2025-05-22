@@ -79,8 +79,8 @@ const TopArtists: React.FC = () => {
                     <div className="h-6 w-6 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
                 <div className="flex overflow-x-auto space-x-4 pb-4 hide-scrollbar">
-                    {[...Array(6)].map((_, i) => (
-                        <div key={i} className="flex-shrink-0 w-[120px] animate-pulse">
+                    {[...Array(6)].map((_,) => (
+                        <div key={Math.random() * 1000000} className="flex-shrink-0 w-[120px] animate-pulse">
                             <div className="w-[120px] h-[120px] bg-zinc-800 rounded-full mb-2"></div>
                             <div className="h-3 bg-zinc-800 rounded w-3/4 mx-auto mb-1"></div>
                             <div className="h-2 bg-zinc-800 rounded w-1/2 mx-auto"></div>
