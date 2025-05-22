@@ -6,9 +6,7 @@ import { useSession, signIn } from 'next-auth/react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-interface ToggleGenreFunction {
-    (genre: string): void;
-}
+type ToggleGenreFunction = (genre: string) => void;
 
 const GenreSelector = () => {
     const { data: session, status } = useSession();
@@ -183,9 +181,9 @@ const GenreSelector = () => {
                             </div>
                         ) : genres.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
-                                {genres.map((genre, index) => (
+                                {genres.map((genre) => (
                                     <span
-                                        key={index}
+                                        key={genre}
                                         onClick={() => toggleGenre(genre)}
                                         className={`px-3 py-1 cursor-pointer rounded-full text-sm transition-colors ${selectedGenres.includes(genre)
                                             ? 'bg-green-600 text-white font-medium'

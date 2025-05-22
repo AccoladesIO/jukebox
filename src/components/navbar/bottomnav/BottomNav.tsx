@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { HiMiniHome } from "react-icons/hi2";
-import { FaChartSimple } from "react-icons/fa6";
-import { FaToolbox } from "react-icons/fa6";
+import { FaChartSimple, FaToolbox } from "react-icons/fa6";
 
 const BottomNav = ({ active }: { active: string }) => {
     const sideLink = [

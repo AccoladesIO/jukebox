@@ -4,8 +4,7 @@ const baseURL = process.env.INTERNAL_URL;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const session = await getSession({ req });
-
-    if (!session || !session.accessToken) {
+    if (!session?.accessToken) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
     try {

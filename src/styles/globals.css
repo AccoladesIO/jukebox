@@ -8,14 +8,13 @@ html {
   scroll-behavior: smooth !important;
   background: #000000;
 }
+
 @layer components {
   .custom-scrollbar::-webkit-scrollbar {
     height: 4px;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: transparent;
-  }
+
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: #1DB954;
