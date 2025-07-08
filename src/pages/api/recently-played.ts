@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(401).json({ error: 'Unauthorized' });
     }
     const accessToken = session.accessToken;
-    const response = await fetchWebApi('/me/player/recently-played', accessToken);
+    const response = await fetchWebApi(`${baseURL}/me/player/recently-played`, accessToken);
     if (!response.ok) {
         const errorData = await response.json();
         return res.status(response.status).json({ error: errorData.error.message || 'Failed to fetch recently played tracks' });
