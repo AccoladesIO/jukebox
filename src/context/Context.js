@@ -1,15 +1,12 @@
-import { createContext, useMemo } from "react";
+import { createContext} from "react";
 
-const Context = createContext();
+const Context = createContext()
 
-const ContextProvider = ({ children }) => {
-    const value = useMemo(() => ({}), []);
-
+const ContextProvider = ({children}) => {
     return (
-        <Context.Provider value={value}>
+        <Context.Provider value={{}}>
             {children}
         </Context.Provider>
-    );
-};
-
-export { Context, ContextProvider };
+    )
+}
+export {Context, ContextProvider}
