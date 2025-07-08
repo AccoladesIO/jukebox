@@ -245,7 +245,7 @@ const MostPlayed: React.FC = () => {
                                         {contentType === tab.type && (
                                             <motion.div
                                                 layoutId="activeTab"
-                                                className="absolute inset-0 rounded-full bg-green-500 -z-10"
+                                                className="absolute inset-0 bg-green-500 -z-10"
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 exit={{ opacity: 0 }}
@@ -275,7 +275,7 @@ const MostPlayed: React.FC = () => {
                 </motion.div>
 
                 {/* Content Area */}
-                <div className="flex-1 overflow-y-auto p-4 md:p-6" ref={contentRef}>
+                <div className="flex-1 overflow-y-auto" ref={contentRef}>
                     <div className="max-w-screen-xl mx-auto">
                         <AnimatePresence mode="wait">
                             {/* Tracks Content */}
