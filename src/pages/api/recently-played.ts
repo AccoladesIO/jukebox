@@ -2,29 +2,26 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 const baseURL = process.env.INTERNAL_URL;
 
-async function fetchWebApi(endpoint: string, accessToken: string, method: string = 'GET', body?: object) {
-    const res = await fetch(`${baseURL}/${endpoint}`, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-        },
-        method,
-        body: body ? JSON.stringify(body) : undefined,
-    });
-    return res;
-}
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const session = await getSession({ req });
     if (!session) {
-        return res.status(401).json({ error: 'Unauthorized' });
+        return res.status(401).json({ message: 'Unauthorized' });
     }
-    const accessToken = session.accessToken;
-    const response = await fetchWebApi(`me/player/recently-played`, accessToken);
-    if (!response.ok) {
-        const errorData = await response.json();
-        return res.status(response.status).json({ error: errorData.error.message || 'Failed to fetch recently played tracks' });
+    try {
+        const response = await fetch(`${baseURL}/me/player/recently-played`, {
+            headers: {
+                Authorization: `Bearer ${session.accessToken}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch top artists');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
     }
-    const data = await response.json();
-    res.status(200).json(data);
-};
-export default handler;
+}
+
